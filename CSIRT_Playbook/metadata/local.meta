@@ -1,0 +1,18 @@
+[views/playbook_overview]
+access = read : [ * ], write : [ * ]
+export = none
+owner = awurster
+version = 6.1.3
+modtime = 1410832520.325781000
+
+[views/resource_access]
+version = 6.1.3
+modtime = 1410831237.324580000
+
+[views/network_activity]
+version = 6.1.3
+modtime = 1410831252.350073000
+
+[views/malware_activity]
+version = 6.1.3
+modtime = 1410842904.319776000

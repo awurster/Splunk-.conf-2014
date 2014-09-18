@@ -1,0 +1,131 @@
+<form>
+  <label>Resource Access</label>
+  <description/>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="field1">
+      <label/>
+      <default>
+        <earliestTime>0</earliestTime>
+        <latestTime/>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Blocked Proxy Users Chart (RA-WEB-01)</title>
+        <searchString>eventtype=cisco-wsa-squid (action=block OR action=error)
+| rex field=cs_username "(?&lt;user_domain_nt&gt;\S+)\\\(?&lt;user_id&gt;\S+)@(?&lt;user_domain_fqdn&gt;.*)"
+| eval user_id=if(isnull(cs_username) OR cs_username="-" OR isnull(user_id),"[" + c_ip + "]",user_id)
+| top user_id</searchString>
+        <earliestTime>$field1.earliest$</earliestTime>
+        <latestTime>$field1.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Blocked Proxy Users Detail (RA-WEB-01)</title>
+        <searchString>eventtype=cisco-wsa-squid (action=block OR action=error)
+| rex field=cs_username "(?&lt;user_domain_nt&gt;\S+)\\\(?&lt;user_id&gt;\S+)@(?&lt;user_domain_fqdn&gt;.*)"
+| eval user_id=if(isnull(cs_username) OR cs_username="-" OR isnull(user_id),"[" + c_ip + "]",user_id)
+| stats values(dest_domain) count by user_id, action, cause</searchString>
+        <earliestTime>$field1.earliest$</earliestTime>
+        <latestTime>$field1.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Outbound Attachment Senders Chart (RA-EMAIL-01)</title>
+        <searchString>eventtype=cisco-esa 
+| transaction mid
+| where isnotnull(attachment_name)
+| top sender</searchString>
+        <earliestTime>$field1.earliest$</earliestTime>
+        <latestTime>$field1.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Top Outbound Attachment Senders Detail (RA-EMAIL-01)</title>
+        <searchString>eventtype=cisco-esa 
+| transaction mid dcid
+| where isnotnull(attachment_name) AND policy_direction=="outbound"
+| `resize-bytes(size,message_size)`
+| eval disposition=case(isnotnull(quarantine_name),"Quarantined ["+quarantine_name+"]",threat_reason=="clean","Delivered [dest_ip]",1=1,"Unknown Outcome")
+| stats dc(recipient) dc(mid) by sender attachment_name size message_subject disposition
+| rename dc(recipient) AS "# Recipients", dc(mid) AS "# Messages", sender AS "From", attachment_name AS "Attachment", size AS "Attachment Size", message_subject AS "Subject", disposition AS "Outcome"
+| sort -count, message_size</searchString>
+        <earliestTime>$field1.earliest$</earliestTime>
+        <latestTime>$field1.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

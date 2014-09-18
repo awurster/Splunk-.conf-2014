@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nav color="#29688A">
+	<collection label="Overview">
+		<view name="playbook_overview" default="true"/>
+		<collection label="Playbook Dashboards">
+			<saved source="all" match="Playbook Queries" view="search" />
+		</collection>
+	</collection>
+
+    <view name="aaa"/>
+    <view name="resource_access"/>
+    <view name="network_activity"/>
+    <view name="malware_activity"/>
+
+	<collection label="References">
+        <divider />
+        <a href="http://www.sans.edu/research/security-laboratory/article/sixtoplogcategories">SANS Top 6 Logging Categories</a>
+        <a href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/UnderstandandusetheCommonInformationModel">Splunk Common Information Model</a>
+	</collection>
+
+</nav>
