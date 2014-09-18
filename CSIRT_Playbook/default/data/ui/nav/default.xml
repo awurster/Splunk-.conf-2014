@@ -14,8 +14,8 @@
 
 	<collection label="References">
         <divider />
-        <a href="http://www.sans.edu/research/security-laboratory/article/sixtoplogcategories">SANS Top 6 Logging Categories</a>
-        <a href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/UnderstandandusetheCommonInformationModel">Splunk Common Information Model</a>
+        <a href="http://www.sans.edu/research/security-laboratory/article/sixtoplogcategories" target="_blank">SANS Top 6 Logging Categories</a>
+        <a href="http://docs.splunk.com/Documentation/Splunk/latest/Knowledge/UnderstandandusetheCommonInformationModel" target="_blank">Splunk Common Information Model</a>
 	</collection>
 
 </nav>

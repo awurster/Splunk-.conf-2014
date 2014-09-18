@@ -1,7 +1,5 @@
 []
 access = read : [ * ], write : [ * ]
-
-[props/sendmail/]
 export = system
 owner = nobody
 
