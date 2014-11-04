@@ -90,6 +90,8 @@ mail_logs within the ESA describe the mail transactions performed by the system,
     Thu Oct 24 19:15:33 2013 Info: MID 120821 antivirus negative 
     Thu Oct 24 19:15:33 2013 Info: MID 120821 Outbreak Filters: verdict positive
 
+###### Logging Embedded URLs ######
+
 Another interesting item to log (which is currently not supported by ESAs) are the raw URLs from within a Message Body.  This is potentially effective against spearphishing or other stealthy campaigns such as "snowshoe" techniques which become harder to detect.  A script or addon within Splunk could then easily analyse the URL pieces or contents themselves.  You might check for URL length, number of punctionations, whether the domain / host is blacklisted, etc.
 
 In the example below, since we use `k=v` format, Splunk automatically extracts the URL into a field `message_url` (yay! no tuning required on your search head!).  *NOTE* that this filter will potentially generate a significant amount of logging noise and/or false positives; best to test these on a limited-scope first (i.e. also match against your own personal recipient address to start).
