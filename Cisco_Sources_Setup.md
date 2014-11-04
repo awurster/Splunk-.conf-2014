@@ -34,7 +34,7 @@ Use the command `show run logging` to verify your config.  Alternatively, use `s
 
 ##### Sourcefire eStreamer #####
 
-* WIP *
+*WIP*
 
 1 - on the source fire manager... generate the client SSL certificate
 (so you can authorise against the API and pull events).
@@ -162,3 +162,7 @@ Next, select `Actions` and configure Splunk as the Syslog server to receive this
 Choose `Add` to enter in your Splunk Forwarder or Indexer address, and choose the formatter your just created using the `Syslog Message` dropdown for `Format`.  At this point, you can trigger actual data to be sent to Splunk using the `Test` message on the screen.
 
 Close the screen to complete the CTD logging setup.
+
+### Sizing and Baselining ###
+
+*WIP* 
