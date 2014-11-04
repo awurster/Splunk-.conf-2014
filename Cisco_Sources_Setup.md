@@ -30,6 +30,23 @@ Use the command `show run logging` to verify your config.  Alternatively, use `s
 
     my-first-ASA# show run logging    
 
+#### IDS / IPS ####
+
+##### Sourcefire eStreamer #####
+
+* WIP *
+
+1 - on the source fire manager... generate the client SSL certificate
+(so you can authorise against the API and pull events).
+
+2 - then you put that file on your splunk server (depending if you "split"
+the app up.. could go in Forwarder / Indexer or even Search Head directly).
+path should be like:
+
+    /opt/splunk/etc/apps/Sourcefire/bin/your_client_cert.pkcs12
+
+then the script reads in the "your_client_cert" file.
+
 #### Content Security ####
 ESA and WSA logs are quite different, although they both run AsyncOS, hence the same section.  
 
