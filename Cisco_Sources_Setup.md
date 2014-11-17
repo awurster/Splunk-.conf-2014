@@ -34,7 +34,7 @@ Use the command `show run logging` to verify your config.  Alternatively, use `s
 
 #### Sourcefire Defence Center (eStreamer) ####
 
-##### From Defense Center ######
+##### From Defense Center #####
 
 1.  Setup the eStreamer service in Defense Center (requires an Admin level account)
 
@@ -47,7 +47,7 @@ _NOTE: Sourcefire recommends that you use the IP address of the Splunk server ra
 
 5.  Ensure the desired event types are selected under _eStreamer Event Configuration_ on the left-hand side (and finally, click _Save_ too)
 
-###### From Splunk ######
+##### From Splunk ######
 
 1.  Download and install the [Cisco eStreamer App](https://apps.splunk.com/app/1629) if you haven't already
 
