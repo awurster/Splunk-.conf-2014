@@ -34,7 +34,7 @@ Use the command `show run logging` to verify your config.  Alternatively, use `s
 
 ##### Sourcefire eStreamer #####
 
-*WIP*
+Worth noting is that Splunk also defaults to index all eStreamer data into its own index called _eStreamer_.
 
 1 - on the source fire manager... generate the client SSL certificate
 (so you can authorise against the API and pull events).
