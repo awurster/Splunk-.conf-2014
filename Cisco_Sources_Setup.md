@@ -30,22 +30,52 @@ Use the command `show run logging` to verify your config.  Alternatively, use `s
 
     my-first-ASA# show run logging    
 
-#### IDS / IPS ####
+### Intrusion Detection ###
 
-##### Sourcefire eStreamer #####
+#### Sourcefire Defence Center (eStreamer) ####
 
-Worth noting is that Splunk also defaults to index all eStreamer data into its own index called _eStreamer_.
+From Defense Center:
+1. Setup the eStreamer service in Defense Center (requires an Admin level account)
+2. Go to: `System > Local > Registration`, then clicking the `Create Client button`.
+3. Add in your Splunk server's IP address (*not hostname*), along with a password (the password is used to secure the client certificate)
+_NOTE: Sourcefire recommends that you use the IP address of the Splunk server rather than its hostname_ 
+4. Once done, you should see a "success" window.  Clikc the little "download" icon to the right of the new host entry to download the client certificate (will end in .pkcs)
+5. Ensure the desired event types are selected under _eStreamer Event Configuration_ on the left-hand side (and finally, click _Save_ too)
 
-1 - on the source fire manager... generate the client SSL certificate
-(so you can authorise against the API and pull events).
+From Splunk:
+1. Download and install the [Cisco eStreamer App]() if you haven't already
+2. Ensure you have [all the pre-requisite Perl modules](https://apps.splunk.com/app/1629/documentation) on your system.  You can use `perldoc -l <pkg name>` or `perl -e "use <pkg name>"`or just running the `estreamer_client.pl` command to see if any errors popup.
+Using Ubuntu for example you can install either via CPAN:
+ ```
+ perl -e "use IO::Socket::SSL"
+ ```
+ Or apt-get.
+ ```
+ ```
+ 
+ And if any errors pop up, just use CPAN or your favorite package manager to install those modules.  Using Ubuntu for example you can install either via CPAN:
+ ```
+ perl -e "use IO::Socket::SSL"
+ ```
+ Or apt-get.
+ ```
+ ```
+ 
+2. Upload the client certificate file to your Splunk server (remember, likely a Forwarder for distributed deployments).  I use SCP like follows:
+`scp Downloads/10.67.41.37.pkcs12 awurster@10.67.41.37:~/downloads/` 
+3. Place your client cert into the eStreamer Splunk App directory (_$SPLUNK_HOME/etc/apps/eStreamer/bin/_)
+`mv ~/downloads/10.67.41.37.pkcs12 /opt/splunk/etc/apps/eStreamer/bin/`
+4. Navigate to the eStreamer app directory (), and run the eStreamer client to validate that it all works:
+```
+cd /opt/splunk/etc/apps/eStreamer/bin/
+./  
+./
+```
 
-2 - then you put that file on your splunk server (depending if you "split"
-the app up.. could go in Forwarder / Indexer or even Search Head directly).
-path should be like:
+Follow the [Cisco eStreamer App Configuration Docs](https://apps.splunk.com/app/1629/documentation) for more detail.
 
-    /opt/splunk/etc/apps/Sourcefire/bin/your_client_cert.pkcs12
 
-then the script reads in the "your_client_cert" file.
+
 
 #### Content Security ####
 ESA and WSA logs are quite different, although they both run AsyncOS, hence the same section.  
