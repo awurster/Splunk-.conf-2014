@@ -60,7 +60,7 @@ Using Ubuntu for example you can check via Perl directly:
  ```
  cpan IO::Socket::SSL
  ```
- Or use apt-get to knock them all out at once with dependencies resolved for you.
+ Or if using your system's package manager, you can generally achieve a more graceful installation.  Using Ubuntu as an example with apt-get, we can knock them all out at once with any quirky OS-specific dependencies resolved along the way.
  ```
  apt-get install libio-socket-inet6-perl libio-socket-ssl-perl libnetaddr-ip-perl libstorable-perl libsocket6-perl libsocket-linux-perl
  ```
