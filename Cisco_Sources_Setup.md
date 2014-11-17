@@ -43,38 +43,48 @@ _NOTE: Sourcefire recommends that you use the IP address of the Splunk server ra
 5. Ensure the desired event types are selected under _eStreamer Event Configuration_ on the left-hand side (and finally, click _Save_ too)
 
 From Splunk:
-1. Download and install the [Cisco eStreamer App]() if you haven't already
+1. Download and install the [Cisco eStreamer App](https://apps.splunk.com/app/1629) if you haven't already
 2. Ensure you have [all the pre-requisite Perl modules](https://apps.splunk.com/app/1629/documentation) on your system.  You can use `perldoc -l <pkg name>` or `perl -e "use <pkg name>"`or just running the `estreamer_client.pl` command to see if any errors popup.
-Using Ubuntu for example you can install either via CPAN:
+Using Ubuntu for example you can check via Perl directly:
  ```
  perl -e "use IO::Socket::SSL"
  ```
- Or apt-get.
- ```
- ```
- 
+
  And if any errors pop up, just use CPAN or your favorite package manager to install those modules.  Using Ubuntu for example you can install either via CPAN:
  ```
  perl -e "use IO::Socket::SSL"
  ```
  Or apt-get.
  ```
+ apt-get install libio-socket-inet6-perl libio-socket-ssl-perl libnetaddr-ip-perl libstorable-perl libsocket6-perl libsocket-linux-perl
  ```
+If you see the usage statement, then you are golden:
+```
+# ./estreamer_client.pl 
+Usage:  estreamer_client.pl [options]
+...
+```
  
 2. Upload the client certificate file to your Splunk server (remember, likely a Forwarder for distributed deployments).  I use SCP like follows:
 `scp Downloads/10.67.41.37.pkcs12 awurster@10.67.41.37:~/downloads/` 
-3. Place your client cert into the eStreamer Splunk App directory (_$SPLUNK_HOME/etc/apps/eStreamer/bin/_)
+3. Place your client cert into the eStreamer Splunk App directory (_$SPLUNK_HOME/etc/apps/eStreamer/bin/_). I choose to place it in the local directory, although it's configurable anywhere. 
 `mv ~/downloads/10.67.41.37.pkcs12 /opt/splunk/etc/apps/eStreamer/bin/`
-4. Navigate to the eStreamer app directory (), and run the eStreamer client to validate that it all works:
+_Depending on how you're running Splunk or copying the cert file, you may need to *chown* or *chmod* it to make it readable by the script._
+4. Navigate to the eStreamer app directory (_$SPLUNK_HOME/etc/apps/eStreamer/bin/_), and run the eStreamer client again to validate that it all works.
 ```
-cd /opt/splunk/etc/apps/eStreamer/bin/
-./  
-./
+$ cd /opt/splunk/etc/apps/eStreamer/bin/
+$ ./estreamer_client.pl 
+Usage:  estreamer_client.pl [options]
+...
 ```
+5. Restart Splunk at this point, and then access the GUI to begin setting up the eStreamer inputs.
+`/opt/splunk/bin/splunk restart`
+6. If restarting right after the App Installation process, you should be prompted to configure the app further, otherwise navigate to the "Settings" page from within the eStreamer App menu.
+7. Point the 
+7. Now, configure the *"Defense Center Connection Details"* section.  Be sure to specify a full path to your certificate file as well.  And if you enabled any of the advanced options in Defense Center, then you'll want to do the same on the eStreamer App config page too.
+8. Finally, uncheck the *"Disable eStreamer"* tick box at the top of the page once you're ready, and *Save* the changes.
 
-Follow the [Cisco eStreamer App Configuration Docs](https://apps.splunk.com/app/1629/documentation) for more detail.
-
-
+Follow the [Cisco eStreamer App Configuration Docs](https://apps.splunk.com/app/1629/documentation) for more detail and tips.
 
 
 #### Content Security ####
